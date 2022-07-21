@@ -53,8 +53,8 @@ function App() {
                 className="popup__input popup__input_data_name"
                 name="name"
                 id="name-input"
-                minlength="2"
-                maxlength="40"
+                minLength="2"
+                maxLength="40"
                 required />
               <span className="popup__input-error name-input-error"></span>
               <input
@@ -62,8 +62,8 @@ function App() {
                 className="popup__input popup__input_data_activity"
                 name="about"
                 id="activity-input"
-                minlength="2"
-                maxlength="200"
+                minLength="2"
+                maxLength="200"
                 required />
               <span className="popup__input-error activity-input-error"></span>
             </>
@@ -82,8 +82,8 @@ function App() {
                 className="popup__input popup__input_data_place"
                 name="name"
                 id="place-input"
-                minlength="2"
-                maxlength="30"
+                minLength="2"
+                maxLength="30"
                 placeholder="Название"
                 required />
               <span className="popup__input-error place-input-error"></span>
@@ -124,20 +124,6 @@ function App() {
         />
         <ImagePopup />
       </div>
-
-      <template id="default-element">
-        <article className="element">
-          <button className="element__delete-button" type="button"></button>
-          <img className="element__image" />
-          <div className="element__description">
-            <h2 className="element__place"></h2>
-            <div className="element__like-container">
-              <button className="element__like" type="button"></button>
-              <p className="element__like-counter"></p>
-            </div>
-          </div>
-        </article>
-      </template>
     </>
   );
 }

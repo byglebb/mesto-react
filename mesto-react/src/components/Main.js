@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import React from 'react';
-import Avatar from '../images/Avatar.png'
+// import Avatar from '../images/Avatar.png'
 import api from '../utils/Api.js';
 
 // function handleEditAvatarClick() {
@@ -19,6 +19,7 @@ export default function Main(props) {
   const [userName, setUserName] = React.useState();
   const [userDescription, setUserDescription] = React.useState();
   const [userAvatar, setUserAvatar] = React.useState();
+  const [cards, setCards] = React.useState([]);
 
   // console.log(api.getUserInfo());
 
@@ -28,13 +29,12 @@ export default function Main(props) {
         setUserName(userDataInfo.name);
         setUserAvatar(userDataInfo.avatar);
         setUserDescription(userDataInfo.about);
-        // userId = userDataInfo._id;
-        // initialCardsList.renderItems(cards);
+        setCards([...cards]);
       })
       .catch((err) => {
         console.log('Ошибка. Запрос не выполнен: ', err);
       })
-  })
+  }, [])
 
   return (
     <main className="content">
@@ -53,6 +53,19 @@ export default function Main(props) {
       </section>
 
       <section className="elements">
+        {cards.map(card => (
+          <article className="element" key={card._id}>
+            <button className="element__delete-button" type="button"></button>
+            <img className="element__image" src={card.link} alt={card.name}/>
+            <div className="element__description">
+              <h2 className="element__place">{card.name}</h2>
+              <div className="element__like-container">
+                <button className="element__like" type="button"></button>
+                <p className="element__like-counter">{card.likes.length}</p>
+              </div>
+            </div>
+          </article>
+        ))}
       </section>
     </main>
   );
