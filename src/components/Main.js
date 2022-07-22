@@ -4,10 +4,16 @@ import api from '../utils/Api.js';
 import Card from './Card.js';
 
 export default function Main(props) {
-  const [userName, setUserName] = React.useState();
-  const [userDescription, setUserDescription] = React.useState();
-  const [userAvatar, setUserAvatar] = React.useState();
+  const [userName, setUserName] = React.useState('');
+  const [userDescription, setUserDescription] = React.useState('');
+  const [userAvatar, setUserAvatar] = React.useState('');
   const [cards, setCards] = React.useState([]);
+  const cardsElements = cards.map(card =>
+    <Card
+      key={card._id}
+      card={card}
+      onCardClick={props.onCardClick}
+    />);
 
   useEffect(() => {
     Promise.all([api.getInitialCards(), api.getUserInfo()])
@@ -15,7 +21,7 @@ export default function Main(props) {
         setUserName(userDataInfo.name);
         setUserAvatar(userDataInfo.avatar);
         setUserDescription(userDataInfo.about);
-        setCards([...cards]);
+        setCards(cards);
       })
       .catch((err) => {
         console.log('Ошибка. Запрос не выполнен: ', err);
@@ -39,13 +45,7 @@ export default function Main(props) {
       </section>
 
       <section className="elements">
-        {cards.map(card =>
-          <Card
-            key={card._id}
-            card={card}
-            onCardClick={props.onCardClick}
-          />
-        )}
+        {cardsElements}
       </section>
     </main>
   );

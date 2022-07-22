@@ -35,7 +35,6 @@ function App() {
   }
 
   return (
-    <>
       <div className="page">
         <Header />
         <Main
@@ -132,7 +131,6 @@ function App() {
           onClose={closeAllPopups}
         />
       </div>
-    </>
   );
 }
 
