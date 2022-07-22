@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import React from 'react';
 // import Avatar from '../images/Avatar.png'
 import api from '../utils/Api.js';
+import Card from './Card.js';
 
 // function handleEditAvatarClick() {
 //   document.querySelector('.popup_avatar').classList.add('popup_opened');
@@ -53,19 +54,13 @@ export default function Main(props) {
       </section>
 
       <section className="elements">
-        {cards.map(card => (
-          <article className="element" key={card._id}>
-            <button className="element__delete-button" type="button"></button>
-            <img className="element__image" src={card.link} alt={card.name}/>
-            <div className="element__description">
-              <h2 className="element__place">{card.name}</h2>
-              <div className="element__like-container">
-                <button className="element__like" type="button"></button>
-                <p className="element__like-counter">{card.likes.length}</p>
-              </div>
-            </div>
-          </article>
-        ))}
+        {cards.map(card =>
+          <Card
+            key={card._id}
+            card={card}
+            onCardClick={props.onCardClick}
+          />
+        )}
       </section>
     </main>
   );
