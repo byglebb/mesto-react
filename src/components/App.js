@@ -59,6 +59,7 @@ function App() {
                 id="name-input"
                 minLength="2"
                 maxLength="40"
+                placeholder="Ваше имя"
                 required />
               <span className="popup__input-error name-input-error"></span>
               <input
@@ -68,6 +69,7 @@ function App() {
                 id="activity-input"
                 minLength="2"
                 maxLength="200"
+                placeholder="Ваша профессия"
                 required />
               <span className="popup__input-error activity-input-error"></span>
             </>
