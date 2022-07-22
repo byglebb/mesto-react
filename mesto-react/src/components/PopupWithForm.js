@@ -1,4 +1,3 @@
-// export default function PopupWithForm({name, title, children}) {
 export default function PopupWithForm(props) {
 
   return (

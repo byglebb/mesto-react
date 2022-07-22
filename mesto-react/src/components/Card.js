@@ -1,5 +1,3 @@
-
-
 export default function Card({card, onCardClick}) {
   function handleClick() {
     onCardClick(card);

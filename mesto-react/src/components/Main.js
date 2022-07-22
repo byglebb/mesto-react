@@ -1,28 +1,13 @@
 import { useEffect } from 'react';
 import React from 'react';
-// import Avatar from '../images/Avatar.png'
 import api from '../utils/Api.js';
 import Card from './Card.js';
-
-// function handleEditAvatarClick() {
-//   document.querySelector('.popup_avatar').classList.add('popup_opened');
-// }
-
-// function handleEditProfileClick() {
-//   document.querySelector('.popup_profile').classList.add('popup_opened');
-// }
-
-// function handleAddPlaceClick() {
-//   document.querySelector('.popup_addcard').classList.add('popup_opened');
-// }
 
 export default function Main(props) {
   const [userName, setUserName] = React.useState();
   const [userDescription, setUserDescription] = React.useState();
   const [userAvatar, setUserAvatar] = React.useState();
   const [cards, setCards] = React.useState([]);
-
-  // console.log(api.getUserInfo());
 
   useEffect(() => {
     Promise.all([api.getInitialCards(), api.getUserInfo()])

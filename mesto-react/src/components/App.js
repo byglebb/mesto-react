@@ -34,8 +34,6 @@ function App() {
     setSelectedCard(card);
   }
 
-  // const isOpen = isEditAvatarPopupOpen || isEditProfilePopupOpen || isAddPlacePopupOpen;
-
   return (
     <>
       <div className="page">
