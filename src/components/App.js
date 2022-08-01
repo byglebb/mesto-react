@@ -4,12 +4,14 @@ import Header from './Header';
 import ImagePopup from './ImagePopup';
 import Main from './Main';
 import PopupWithForm from './PopupWithForm';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState(null);
+  const [currentUser, setCurrentUser] = useState({});
 
   function openEditProfilePopup() {
     setIsEditProfilePopupOpen(true);
@@ -35,6 +37,7 @@ function App() {
   }
 
   return (
+    <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <Header />
         <Main
@@ -128,11 +131,12 @@ function App() {
             </>
           }
         />
-        <ImagePopup 
+        <ImagePopup
           card={selectedCard}
           onClose={closeAllPopups}
         />
       </div>
+    </CurrentUserContext.Provider>
   );
 }
 
