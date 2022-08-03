@@ -14,6 +14,7 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState(null);
   const [currentUser, setCurrentUser] = React.useState({});
+  const [cards, setCards] = React.useState([]);
 
   useEffect(() => {
     api.getUserInfo()
@@ -22,8 +23,16 @@ function App() {
       })
       .catch((err) => {
         console.log('Ошибка. Запрос не выполнен: ', err);
+      });
+
+    api.getInitialCards()
+      .then((cards) => {
+        setCards(cards);
       })
-  })
+      .catch((err) => {
+        console.log('Ошибка. Запрос не выполнен: ', err);
+      });
+  }, [])
 
   function openEditProfilePopup() {
     setIsEditProfilePopupOpen(true);
@@ -57,6 +66,7 @@ function App() {
           onAddPlace={openAddPlacePopup}
           onEditAvatar={openEditAvatarPopup}
           onCardClick={handleCardClick}
+          cards={cards}
         />
         <Footer />
         <PopupWithForm

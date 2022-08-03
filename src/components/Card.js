@@ -1,3 +1,6 @@
+import { useContext } from 'react';
+import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
+
 export default function Card({card, onCardClick}) {
   function handleImageClick() {
     onCardClick(card);
