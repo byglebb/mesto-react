@@ -1,12 +1,15 @@
 import { useContext } from 'react';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 
-export default function Card({ card, onCardClick, onCardLike }) {
+export default function Card({ card, onCardClick, onCardLike, onCardDelete }) {
   function handleImageClick() {
     onCardClick(card);
   }
   function handleLikeClick() {
     onCardLike(card);
+  }
+  function handleDeleteClick() {
+    onCardDelete(card);
   }
 
   const currentUser = useContext(CurrentUserContext);
@@ -19,7 +22,7 @@ export default function Card({ card, onCardClick, onCardLike }) {
 
   return (
     <article className="element" key={card._id}>
-      <button className={cardDeleteButtonClassName} type="button"></button>
+      <button className={cardDeleteButtonClassName} onClick={handleDeleteClick} type="button"></button>
       <img
         className="element__image"
         src={card.link}
