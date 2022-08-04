@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 import api from '../utils/Api';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
+import AddPlacePopup from './AddPlacePopup';
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
@@ -101,6 +102,17 @@ function App() {
       });
   }
 
+  function handleAddPlaceSubmit({ name, link }) {
+    api.addCard({ name, link })
+      .then(newCard => {
+        setCards([newCard, ...cards]);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log('Ошибка. Запрос не выполнен: ', err);
+      });
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -119,35 +131,10 @@ function App() {
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
           onUpdateUser={handleUpdateUser} />
-        <PopupWithForm
-          name="addcard"
-          title="Новое место"
-          submitButton="Создать"
+        <AddPlacePopup
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
-          children={
-            <>
-              <input
-                type="text"
-                className="popup__input popup__input_data_place"
-                name="name"
-                id="place-input"
-                minLength="2"
-                maxLength="30"
-                placeholder="Название"
-                required />
-              <span className="popup__input-error place-input-error"></span>
-              <input
-                type="url"
-                className="popup__input popup__input_data_link"
-                name="link"
-                id="link-input"
-                placeholder="Ссылка на картинку"
-                required />
-              <span className="popup__input-error link-input-error"></span>
-            </>
-          }
-        />
+          onAddPlace={handleAddPlaceSubmit} />
         <PopupWithForm
           name="confirmation"
           title="Вы уверены?"

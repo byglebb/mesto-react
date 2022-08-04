@@ -12,7 +12,7 @@ export default function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
   }
 
   function handleChangeDescription(evt) {
-    setDescription(evt.target.value)
+    setDescription(evt.target.value);
   }
 
   function handleSubmit(evt) {
