@@ -8,6 +8,7 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import { useEffect } from 'react';
 import api from '../utils/Api';
 import EditProfilePopup from './EditProfilePopup';
+import EditAvatarPopup from './EditAvatarPopup';
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
@@ -89,6 +90,17 @@ function App() {
       });
   }
 
+  function handleUpdateAvatar({ avatar }) {
+    api.updateAvatar({ avatar })
+      .then(res => {
+        setCurrentUser(res);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log('Ошибка. Запрос не выполнен: ', err);
+      });
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -141,25 +153,10 @@ function App() {
           title="Вы уверены?"
           submitButton="Да"
         />
-        <PopupWithForm
-          name="avatar"
-          title="Обновить аватар"
-          submitButton="Сохранить"
+        <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
-          children={
-            <>
-              <input
-                type="url"
-                className="popup__input popup__input_data_avatar"
-                name="avatar"
-                id="avatar-input"
-                placeholder="Ссылка на аватар"
-                required />
-              <span className="popup__input-error avatar-input-error"></span>
-            </>
-          }
-        />
+          onUpdateAvatar={handleUpdateAvatar} />
         <ImagePopup
           card={selectedCard}
           onClose={closeAllPopups}
