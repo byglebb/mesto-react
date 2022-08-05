@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import React from 'react';
 import Card from './Card.js';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 
