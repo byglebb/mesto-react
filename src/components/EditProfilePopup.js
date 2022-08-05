@@ -27,7 +27,7 @@ export default function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
   useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
-  }, [currentUser]);
+  }, [currentUser, isOpen]);
 
   return (
     <PopupWithForm
@@ -36,35 +36,31 @@ export default function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
       submitButton="Сохранить"
       isOpen={isOpen}
       onClose={onClose}
-      onSubmit={handleSubmit}
-      children={
-        <>
-          <input
-            type="text"
-            value={name}
-            onChange={handleChangeName}
-            className="popup__input popup__input_data_name"
-            name="name"
-            id="name-input"
-            minLength="2"
-            maxLength="40"
-            placeholder="Ваше имя"
-            required />
-          <span className="popup__input-error name-input-error"></span>
-          <input
-            type="text"
-            value={description}
-            onChange={handleChangeDescription}
-            className="popup__input popup__input_data_activity"
-            name="about"
-            id="activity-input"
-            minLength="2"
-            maxLength="200"
-            placeholder="Ваша профессия"
-            required />
-          <span className="popup__input-error activity-input-error"></span>
-        </>
-      }
-    />
+      onSubmit={handleSubmit}>
+      <input
+        type="text"
+        value={name || ''}
+        onChange={handleChangeName}
+        className="popup__input popup__input_data_name"
+        name="name"
+        id="name-input"
+        minLength="2"
+        maxLength="40"
+        placeholder="Ваше имя"
+        required />
+      <span className="popup__input-error name-input-error"></span>
+      <input
+        type="text"
+        value={description || ''}
+        onChange={handleChangeDescription}
+        className="popup__input popup__input_data_activity"
+        name="about"
+        id="activity-input"
+        minLength="2"
+        maxLength="200"
+        placeholder="Ваша профессия"
+        required />
+      <span className="popup__input-error activity-input-error"></span>
+    </PopupWithForm>
   );
 }

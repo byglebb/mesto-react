@@ -5,15 +5,17 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 
 export default function Main(props) {
   const currentUser = useContext(CurrentUserContext);
-  
-  const cardsElements = props.cards.map(card =>
+
+  const cardsElements = props.cards.map((card) => (
     <Card
       key={card._id}
       card={card}
       onCardClick={props.onCardClick}
       onCardLike={props.onCardLike}
       onCardDelete={props.onCardDelete}
-    />);
+    />
+    )
+  );
 
   return (
     <main className="content">
